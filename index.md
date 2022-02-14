@@ -1,35 +1,23 @@
+
+
 ## Portfolio
 
 ---
-
-### Category Name 1 
-
-[Project 1 Title](/sample_page)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+### [Temperature and the Elderly Population in the United States](/project_probation/index)
+This projects seeks to determine if there is a spatial relationship between the elderly population in the U.S. and temperature.
+[<img src="/project1_486/temp_us.jpg?raw=true"/>](/project_probation/index)
 
 ---
-[Project 2 Title](/pdf/sample_presentation.pdf)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+### [Mapping Routes Across Darien Gap](/project_pnw/index)
+This project will try to make travel across the Darien Gap.
+[<img src="/project2_486/darien.jpg?raw=true"/>](/project_probation/index)
 
 ---
-[Project 3 Title](http://example.com/)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
----
 
 ### Category Name 2
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
-- [Project 3 Title](http://example.com/)
-- [Project 4 Title](http://example.com/)
-- [Project 5 Title](http://example.com/)
-
+- 
 ---
-
-
-
-
----
-<p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
-<!-- Remove above link if you don't want to attibute -->
