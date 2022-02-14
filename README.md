@@ -4,7 +4,7 @@
 
 This is a github page to showcase my GIS work. It contains several projects completed using R and QGIS. These are listed in the porject folder.
 
-<img src="images/demo.gif?raw=true"/>
+<img src="images/Baltimore.jpeg?raw=true"/>
 
 ### Installation
 
