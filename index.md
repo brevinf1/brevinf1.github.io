@@ -17,7 +17,13 @@ This project will try to make travel across the Darien Gap.
 
 ### Labs
 
-#### [Lab 2: Population Pyramid: Puerto Rico](/Labs)
+#### [Lab 2: Population Pyramid: Puerto Rico](/Labs/Lab3_adding_maps_to_website/index.md)
+
+Graphic from Lab 2 displaying a population pyramid for Puerto Rico based off 2019 ACS data.
+[<img src= "/Labs/Lab3_adding_maps_to_website/pr_pyramid.jpg?raw=true"/>](/Labs/Lab3_adding_maps_to_website/pr_pyramid.jpg)
+
+
+
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
