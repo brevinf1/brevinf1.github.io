@@ -15,7 +15,7 @@ This project will try to make travel across the Darien Gap.
 ---
 
 
-### Category Name 2
+### Labs 
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
