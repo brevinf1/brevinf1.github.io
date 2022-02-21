@@ -15,7 +15,9 @@ This project will try to make travel across the Darien Gap.
 ---
 
 
-### Labs 
+### Labs
+
+#### [Lab 2: Population Pyramid: Puerto Rico](/Labs)
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
