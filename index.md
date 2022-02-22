@@ -23,7 +23,7 @@ Graphic from Lab 2 displaying a population pyramid for Puerto Rico based off 201
 [<img src= "/Labs/Lab3_adding_maps_to_website/pr_pyramid.jpg?raw=true"/>](/Labs/Lab3_adding_maps_to_website/pr_pyramid.jpg)
 
 #### [Lab 3: Interactive Map](/Labs/Lab3_adding_maps_to_website/index.md)
-[<img src= "/Labs/Lab3_adding_maps_to_website/vet_map.html?raw=true"/>](/Labs/Lab3_adding_maps_to_website/vet_map.html)
+[<img src= "/Labs/Lab3_adding_maps_to_website/vet_map.jpg?raw=true"/>](/Labs/Lab3_adding_maps_to_website/vet_map.jpg)
 
 
 
