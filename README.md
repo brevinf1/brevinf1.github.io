@@ -1,4 +1,4 @@
-## Developer Portfolio Landing Page Template
+## Brevin Franklin UMBC GIS Github 
 
 ### Introduction
 
