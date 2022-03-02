@@ -1,9 +1,9 @@
-## Lab 3: Maps of DMV (D.C., Maryland, and Virgina) Area Veterans
+## Lab 3: Map of DMV (D.C., Maryland, and Virgina) Area Veterans
 
-**Map Description:** 
-This is a chloropleth map of the number of veterans in Virginia, D.C., and Maryland census tracts based off 2019 ACS data. The code is meant to create an interactive hmtl page of the map.
+**Map of DMV (D.C., Maryland, and Virgina) Area Veterans Description:** 
+This is a chloropleth map of the number of veterans in Virginia, D.C., and Maryland census tracts based off 2019 ACS data. The code is meant to create an interactive html page of the map.
 
-### R Code 
+### R Code DMV (D.C., Maryland, and Virgina) Area Veterans Description
 
 ```{r  Exercise 6.8, 2 plotting points part 1}
 
