@@ -1,7 +1,7 @@
-## Lab 3: Temperature and the Elderly
+## Lab 3: Maps of DMV (D.C., Maryland, and Virgina) Area Veterans
 
-**Project description:** 
-This is a chloropleth map of the number of veterans in Virginia census tracts based off 2019 ACS data. The code is meant to create an interactive hmtl page of the map.
+**Map Description:** 
+This is a chloropleth map of the number of veterans in Virginia, D.C., and Maryland census tracts based off 2019 ACS data. The code is meant to create an interactive hmtl page of the map.
 
 ### R Code 
 
