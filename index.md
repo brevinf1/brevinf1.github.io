@@ -26,7 +26,7 @@ Graphic from Lab 2 displaying a population pyramid for Puerto Rico based off 201
 Map of Veterans in the Virgina area (from 2019 ACS data)
 [<img src= "/Labs/Lab3_adding_maps_to_website/vet_map.jpg?raw=true"/>](/Labs/Lab3_adding_maps_to_website/vet_map.jpg)
 
-#### [Lab 4: Baltimore 311 Data Map](/Labs/Lab_4/parking_and_tree_calls.jpg)
+#### [Lab 4: Baltimore 311 Data Map](/Labs/Lab_4/index.md)
 Map of the Ratio of 311 calls for Parking Violations to Tree/Shrub calls in Baltimore Census Tracts
 [<img src= "/Labs/Lab_4/parking_and_tree_calls.jpg?raw=true"/>](/Labs/Lab_4/parking_and_tree_calls.jpg)
 
