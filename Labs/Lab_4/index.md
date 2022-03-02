@@ -3,7 +3,7 @@
 **Map Description:** 
 This is a chloropleth map that shows the ratio of Baltimore parking violation and trees/shrubs 311 calls. This map was created using a join by location to the 311 data, finding the number of 311 calls of each type for each census tract. Another variable containing the ratio of the preceding variables is symbolized on the map using the color scheme.
 
-# Lab 4, Brevin Franklin, GES 486
+### R Code
 
 ```{r, reading in 311 data, results = FALSE}
 library(tidyr)
@@ -141,38 +141,6 @@ ggsave("parking_and_tree_calls.jpg")
 ```
 
 #### An important thing to notice in the following graph is that the ratio is lowest for much of the city, not necessarily because the relationship is true, but because there is probably much less parking going on in these areas of the city where people actually live and thus less parking violation enforcement. Illegal parking enforcement is probably much more intense in downtown where there is a lot of traffic. At the same time, the tree/shrub calls are pretty high near the harbor, no doubt because there is a lot of city property with vegetation here. It is also an area frequented by tourists, so there is more motivation for the city to maintain vegetation here as opposed to other areas.
-
-```{r, spatial regression}
-
-# Trying to determine the significance of the relationship between tree/shrub calls and parking violations.
-
-formula1 <- "parking_calls ~ tree_calls"
-
-library(spatialreg)
-
-library(spdep)
-
-wts <- tract_tree_parking_sf %>%
-  poly2nb() %>%
-  nb2listw()
-
-lag_model <- lagsarlm(
-  formula = formula1, 
-  data = tract_tree_parking_sf, 
-  listw = wts
-)
-
-summary(lag_model, Nagelkerke = TRUE)
-
-#When we use spatial regression to test the relationship between these two variables, we find that there is not a significant relationship between the two given the larger p-value. Also, the coefficeint is positive, suggesting more tree calls not related to lower parking violation calls.
-
-```
-
-### Write up on Part 2 of Lab 4
-
-#### The data that I used all came from Baltimore 311 Data. I used the observations on parking violations and tree/shrub calls. I was having some issues loading in the JSON data for trees. I thought an alternative would be to use the tree/shrub calls. I looked at this relationship because I thought vegetation in a place might be related to how close community was. For example, if people are concerned about the vegetation in their community, maybe they spend more time outside and interact with their neighbors. As a result, these neighbors communinicate with one another more readily. This might then reduce the number of parking violation calls because if someone is illegally parked, the neighbors will resolve the issue among themeselves before calling 311. In short, I was expecting calls for parking violations to be low when tree/shrub calls were high. I tested this relation using a spatial regression. The results were that the relationship was not significant.
-
-
 
 
 
