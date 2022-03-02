@@ -5,195 +5,177 @@ This is a chloropleth map that shows the ratio of Baltimore parking violation an
 
 # Lab 4, Brevin Franklin, GES 486
 
-```{r census api, eval = FALSE}
+```{r, reading in 311 data, results = FALSE}
+library(tidyr)
 
-library(tidycensus);
-census_api_key("b6b09fbf43a886071cd481634f74553533bf5d00", overwrite = TRUE)
+# The following reads in the Baltimore 311 data from a csv file
+
+bal_city_data <- read.csv("311_Customer_Service_Requests_2020.csv", header = TRUE)
+
+```
+
+```{r, preparing data, results = FALSE}
+library(dplyr)
+
+# The following separates the column containing request type so that it can be easily manipulated. 
+
+bal_city_data <- separate(bal_city_data, srtype, c("code", "issue"), sep = "-")
+
+```
+
+```{r, renaming variables, results = FALSE}
+
+# The following renames the variables.
+
+
+bal_city_parking <- filter(bal_city_data, issue == "Parking Complaint")
+
+bal_city_trees <- filter(bal_city_data, issue == "Trees and Shrubs")
+
 
 
 ```
 
 
 
-## Exercises 8.6
+```{r, converting sf objects, results = FALSE}
 
-### 1
-
-```{r Exercises 8.6, 1 code, Getting Data}
-
-library(tidycensus)
-library(tidyverse)
-library(segregation)
-library(tigris)
 library(sf)
 
-# Get MD tract data by race/ethnicity
-md_acs_data <- get_acs(
-  geography = "tract",
-  variables = c(
-    white = "B03002_003",
-    black = "B03002_004",
-    asian = "B03002_006",
-    hispanic = "B03002_012"
-  ), 
-  state = "MD",
-  geometry = TRUE,
-  year = 2019
-) 
+# The following converts the seperate files for the parking and tree/shrub data, defines them as SF objects, and defines the geographic coordinate system. It then transforms the coordinate system to NAD83 UTM Zone 18.  
 
-# Use tidycensus to get urbanized areas by population with geometry, 
-# then filter for those that have populations of 50,000 or more
-us_urban_areas <- get_acs(
-  geography = "urban area",
-  variables = "B01001_001",
-  geometry = TRUE,
-  year = 2019,
-  survey = "acs1"
-) %>%
-  filter(estimate >= 50000) %>%
-  transmute(urban_name = str_remove(NAME, 
-                                    fixed(", MD Urbanized Area (2010)")))
+bal_city_parking_sf <- bal_city_parking%>%
+  mutate_at(vars(longitude, latitude), as.numeric) %>%   # coordinates must be numeric
+  st_as_sf(
+    coords = c("longitude", "latitude"),
+    agr = "constant",
+    crs = 4267,       
+    stringsAsFactors = FALSE,
+    remove = TRUE
+    )  %>% 
+  st_transform(26918) %>%
+  select(ï..objectid:policepost, geometry)
 
-# Compute an inner spatial join between the MD tracts and the 
-# urbanized areas, returning tracts in the largest MD urban 
-# areas with the urban_name column appended
-md_urban_data <- md_acs_data %>%
-  st_join(us_urban_areas, left = FALSE) %>%
-  select(-NAME) %>%
-  st_drop_geometry()
+bal_city_trees_sf <- bal_city_trees%>%
+  mutate_at(vars(longitude, latitude), as.numeric) %>%   # coordinates must be numeric
+  st_as_sf(
+    coords = c("longitude", "latitude"),
+    agr = "constant",
+    crs = 4267,       
+    stringsAsFactors = FALSE,
+    remove = TRUE
+    ) %>% 
+  st_transform(26918) %>%
+  select(ï..objectid:policepost, geometry)
+
+
+
 
 ```
 
-```{r Exercises 8.6, 1 code, Dissimilarity Index}
+```{r, determine coord. sys., eval = FALSE}
 
-# computing dissimilarity index for each major urban area in Maryland where 0 represents perfect integration between the two groups and 1 represents complete segregation
+library(crsuggest)
+# for determining the coordinate system
 
-md_disim_index <- md_urban_data %>%
-  filter(variable %in% c("white", "black")) %>%
-  group_by(urban_name) %>%
-  group_modify(~
-    dissimilarity(.x,
-      group = "variable",
-      unit = "GEOID",
-      weight = "estimate"
-    )
-  ) %>% 
-  arrange(desc(est))
+guess_crs(bal_city_parking_sf, c(-76.63399189, 39.26137126), units = NULL, n_return = 10)
+
+# Find that the data are in NAD27 geographic coordinate system.
 
 ```
 
-```{r Exercises 8.6, 1 code, Dissimilarity Index for Baltimore}
 
-library(tidycensus)
-library(tidyverse)
-library(segregation)
+```{r, Bal Tracts from census, results = FALSE}
+
 library(tigris)
-library(sf)
 
-# filtering the md_urban_data down to just Baltimore area
+# The following gets the shapefiles for Baltimore City census tracts.
 
-bal_local_seg <- md_urban_data %>%
-  filter(urban_name == "Baltimore") %>%
-  mutual_local(
-    group = "variable",
-    unit = "GEOID",
-    weight = "estimate", 
-    wide = TRUE
-  )
+bal_tracts <- tracts(state = "MD", county = "Baltimore City", year = "2019") %>%
+  mutate_at(vars(INTPTLON, INTPTLAT), as.numeric) %>%
+  st_as_sf(coords = c("INTPTLON", "INTPTLAT"),
+    agr = "constant",
+    crs = 6269,       
+    stringsAsFactors = FALSE,
+    remove = TRUE) %>%
+  st_transform(26918) %>%
+  select(STATEFP:AWATER, geometry)
 
 ```
 
-```{r Exercises 8.6, 1 code, joining to Baltimore tracts}
+```{r, joining, results = FALSE}
 
-library(tidycensus)
-library(tidyverse)
-library(segregation)
-library(tigris)
-library(sf)
+# This code does a spatial join between trees and parking data that are within census tracts to the census tract data.
 
-# join of Baltimore tracts to Baltimore segregation index
+tree_in_tract <- st_join(bal_city_trees_sf, bal_tracts, st_within)
 
-bal_tracts_seg <- tracts("MD", cb = TRUE) %>%
-  inner_join(bal_local_seg, by = "GEOID")
+parking_in_tract <- st_join(bal_city_parking_sf, bal_tracts, st_within)
 
-bal_tracts_seg %>%
-  ggplot(aes(fill = ls)) + 
-  geom_sf(color = NA) + 
-  coord_sf(crs = 26918) + 
-  scale_fill_viridis_c(option = "inferno", direction = -1) +
+
+```
+
+```{r, counting, results = FALSE}
+
+# The following counts the number of tree/shrub complaints as well as parking violation complaints for each census tract.
+
+tree_tract_count <- count(as_tibble(tree_in_tract), TRACTCE) %>%
+  print()
+
+parking_tract_count <- count(as_tibble(parking_in_tract), TRACTCE) %>%
+  print()
+
+```
+
+```{r, graph of the relationship between parking and tree calls}
+library(ggplot2)
+# Many tree calls may be sign people concerned about look of neighborhood and maybe spend more time outside socializing with neighbors. Would then expect illegal parking to be down because neighbors closer and could mediate parking violations among themselves.
+
+ggplot(tract_tree_parking_sf) + 
+  geom_sf(aes(fill = parking_to_tree)) + 
+  scale_fill_viridis_c() + 
   theme_void() + 
-  labs(fill = "White/Black\nsegregation index")
+  labs(fill = "Parking Violations to\nTree/Shrub Calls")
 
+ggsave("parking_and_tree_calls.jpg")
 
 ```
 
-### The segregation index in Baltimore does seem to be much different than that for L.A. The most segregated parts of L.A. seem to have a northwest to southeast extent. Black/White segregation in Baltimore seems to have the most segregated parts of the city along the east west extent.
+#### An important thing to notice in the following graph is that the ratio is lowest for much of the city, not necessarily because the relationship is true, but because there is probably much less parking going on in these areas of the city where people actually live and thus less parking violation enforcement. Illegal parking enforcement is probably much more intense in downtown where there is a lot of traffic. At the same time, the tree/shrub calls are pretty high near the harbor, no doubt because there is a lot of city property with vegetation here. It is also an area frequented by tourists, so there is more motivation for the city to maintain vegetation here as opposed to other areas.
 
-### 2
+```{r, spatial regression}
 
-```{r Exercise 8.6, 2 code, getting Baltimore housing data to run regression}
+# Trying to determine the significance of the relationship between tree/shrub calls and parking violations.
 
-library(tidycensus)
-library(sf)
+formula1 <- "parking_calls ~ tree_calls"
 
-# the following gets data on housing in Baltimore and Baltimore County as well as the census tracts 
+library(spatialreg)
 
-bal_counties <- c("Baltimore County", "Baltimore City")
+library(spdep)
 
-variables_to_get <- c(
-  median_value = "B25077_001",
-  median_rooms = "B25018_001",
-  median_income = "DP03_0062",
-  total_population = "B01003_001",
-  median_age = "B01002_001",
-  pct_college = "DP02_0068P",
-  pct_foreign_born = "DP02_0094P",
-  pct_white = "DP05_0077P",
-  median_year_built = "B25037_001",
-  percent_ooh = "DP04_0046P"
+wts <- tract_tree_parking_sf %>%
+  poly2nb() %>%
+  nb2listw()
+
+lag_model <- lagsarlm(
+  formula = formula1, 
+  data = tract_tree_parking_sf, 
+  listw = wts
 )
 
-bal_data <- get_acs(
-  geography = "tract",
-  variables = variables_to_get,
-  state = "MD",
-  county = bal_counties,
-  geometry = TRUE,
-  output = "wide",
-  year = 2019
-) %>%
-  select(-NAME) %>%
-  st_transform(26918) # UTM Zone 18
+summary(lag_model, Nagelkerke = TRUE)
 
+#When we use spatial regression to test the relationship between these two variables, we find that there is not a significant relationship between the two given the larger p-value. Also, the coefficeint is positive, suggesting more tree calls not related to lower parking violation calls.
 
 ```
 
-```{r Exercise 8.6, code 2, run regression}
+### Write up on Part 2 of Lab 4
 
-library(sf)
-library(units)
+#### The data that I used all came from Baltimore 311 Data. I used the observations on parking violations and tree/shrub calls. I was having some issues loading in the JSON data for trees. I thought an alternative would be to use the tree/shrub calls. I looked at this relationship because I thought vegetation in a place might be related to how close community was. For example, if people are concerned about the vegetation in their community, maybe they spend more time outside and interact with their neighbors. As a result, these neighbors communinicate with one another more readily. This might then reduce the number of parking violation calls because if someone is illegally parked, the neighbors will resolve the issue among themeselves before calling 311. In short, I was expecting calls for parking violations to be low when tree/shrub calls were high. I tested this relation using a spatial regression. The results were that the relationship was not significant.
 
-# The following code prepares the data for a spatial regression, creating a population density variable and a median structure age variable
 
-bal_data_for_model <- bal_data %>%
-  mutate(pop_density = as.numeric(set_units(total_populationE / st_area(.), "1/km2")),
-         median_structure_age = 2019 - median_year_builtE) %>%
-  select(!ends_with("M")) %>% 
-  rename_with(.fn = ~str_remove(.x, "E$")) %>%
-  na.omit()
 
-# the following is the actual code for the regression equation
 
-formula <- "log(median_value) ~ median_rooms + median_income + pct_college + pct_foreign_born + pct_white + median_age + median_structure_age + percent_ooh + pop_density + total_population"
 
-model1 <- lm(formula = formula, data = bal_data_for_model)
 
-summary(model1)
 
-# Then, we store the residuals from the equation in an object
-
-bal_data_for_model$residuals <- residuals(model1)
-```
-
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
