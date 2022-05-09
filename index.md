@@ -8,8 +8,8 @@ This projects seeks to determine if there is a spatial relationship between the 
 [<img src="/Projects/Project1_486/maps_project1.gif?raw=true"/>](/Projects/Project1_486/temp_us.jpg)
 
 ---
-### [Mapping Routes Across Darien Gap](/Projects/Project2_486/index.md)
-This project will try to make travel across the Darien Gap.
+### [Mapping accessiblity of ground ambulantory services to hospitals in the state of Tennessee](/Projects/Project2_486/index.md)
+This project examines accessiblity of ground ambulatroy services in the state of Tennessee.
 [<img src="/Projects/Project2_486/darien_gap.png?raw=true"/>](/Projects/Project2_486/darien_gap.jpg)
 
 ---
