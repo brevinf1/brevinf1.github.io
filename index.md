@@ -8,7 +8,7 @@ This projects seeks to determine if there is a spatial relationship between the 
 [<img src="/Projects/Project1_486/maps_project1.gif?raw=true"/>](/Projects/Project1_486/temp_us.jpg)
 
 ---
-### [Mapping Accessiblity of Ground Ambulantory Aervices to Hospitals in the State of Tennessee](/Projects/Project2_486/index.md)
+### [Mapping Accessiblity of Ground Ambulantory Aervices to Hospitals in the State of Tennessee](/Projects/Project2_486/2022_05_14_Final_Project.html)
 This project examines accessiblity of ground ambulatroy services in the state of Tennessee.
 
 Tennessee State Maps
