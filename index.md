@@ -10,7 +10,7 @@ This projects seeks to determine if there is a spatial relationship between the 
 ---
 ### [Mapping Accessiblity of Ground Ambulantory Aervices to Hospitals in the State of Tennessee](/Projects/Project2_486/index.md)
 This project examines accessiblity of ground ambulatroy services in the state of Tennessee.
-[<img src="/Projects/Project2_486/placeholder.jpg?raw=true"/>](/Projects/Project2_486/placeholder.jpg)
+[<img src="/Projects/Project2_486/tn_maps.gif?raw=true"/>](/Projects/Project2_486/tn_maps.gif)
 
 ---
 
