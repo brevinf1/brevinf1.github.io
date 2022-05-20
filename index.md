@@ -10,9 +10,32 @@ This projects seeks to determine if there is a spatial relationship between the 
 ---
 ### [Mapping Accessiblity of Ground Ambulantory Aervices to Hospitals in the State of Tennessee](/Projects/Project2_486/index.md)
 This project examines accessiblity of ground ambulatroy services in the state of Tennessee.
+
+Tennessee State Maps
+
 [<img src="/Projects/Project2_486/tn_maps_animation.gif?raw=true"/>](/Projects/Project2_486/tn_maps_animation.gif)
 
+[<img src="/Projects/Project2_486/tn_accessibility_maps/tn_map1.jpeg?raw=true"/>](/Projects/Project2_486/tn_accessibility_maps/tn_map1.jpeg)
+
+[<img src="/Projects/Project2_486/tn_accessibility_maps/tn_map2.jpeg?raw=true"/>](/Projects/Project2_486/tn_accessibility_maps/tn_map2.jpeg)
+
+[<img src="/Projects/Project2_486/tn_accessibility_maps/tn_map3.jpeg?raw=true"/>](/Projects/Project2_486/tn_accessibility_maps/tn_map3.jpeg)
+
+[<img src="/Projects/Project2_486/tn_accessibility_maps/tn_map4.jpeg?raw=true"/>](/Projects/Project2_486/tn_accessibility_maps/tn_map4.jpeg)
+
+[<img src="/Projects/Project2_486/tn_accessibility_maps/tn_map5.jpeg?raw=true"/>](/Projects/Project2_486/tn_accessibility_maps/tn_map5.jpeg)
+
+[<img src="/Projects/Project2_486/tn_accessibility_maps/tn_map6.jpeg?raw=true"/>](/Projects/Project2_486/tn_accessibility_maps/tn_map6.jpeg)
+
+Jackson Hospital Service Shed Hex Maps
+
 [<img src="/Projects/Project2_486/jack_maps_animation.gif?raw=true"/>](/Projects/Project2_486/jack_maps_animation.gif)
+
+[<img src="/Projects/Project2_486/jack_hos_accessibility_maps/jack_map1.jpeg?raw=true"/>](/Projects/Project2_486/jack_hos_accessibility_maps/jack_map1.jpeg)
+
+[<img src="/Projects/Project2_486/jack_hos_accessibility_maps/jack_map2.jpeg?raw=true"/>](/Projects/Project2_486/jack_hos_accessibility_maps/jack_map2.jpeg)
+
+[<img src="/Projects/Project2_486/jack_hos_accessibility_maps/jack_map3.jpeg?raw=true"/>](/Projects/Project2_486/jack_hos_accessibility_maps/jack_map3.jpeg)
 
 ---
 
