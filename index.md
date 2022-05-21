@@ -21,6 +21,13 @@ Jackson Hospital Service Shed Hex Maps
 
 [<img src="/Projects/Project2_486/jack_maps_animation.gif?raw=true"/>](/Projects/Project2_486/jack_maps_animation.gif)
 
+#### Project Description
+
+  This project looks at a couple of ways to examine ambulance and hospital accessibility as well as the combined accessibility to both in the state of Tennessee. Accessibility can be thought of as how easy it is for an individual to access a means of transportation. This is done using the distance from a census tract centroid to its nearest hospital and to its nearest ambulatory care unit. The most interesting findings were that there does not appear to be any clustering of hospital-inaccessible areas in Tennessee as far as the distance measure is concerned. The results do no change if distance is adjusted by wage. However, this should be assessed in the future with a statistical test like Moran’s I. Looking at Ambulatory Service accessibility, the wage adjusted distance does shed some light on a cluster of ambulance-inaccessible census tracts roughly northeast of the state’s center.
+  I also look at accessibility the Jackson-Madison County General Hospital service shed, completing roughly the same analysis detailed above. What I find is that even in a 15-minute isochrone, adjusting for income can show places within the isochrone that struggle with accessibility. East Jackson, which has historically been a disadvantaged part of the city, stands apart from the rest of the Jackson-Madison County General Hospital service shed as a region inaccessible to hospital and ambulances within the shed. 
+  
+  
+
 
 ---
 
